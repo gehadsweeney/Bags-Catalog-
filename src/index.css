@@ -1,0 +1,11 @@
+
+
+html {
+  direction: rtl;
+  text-align: right;
+}
+
+body {
+font-family: 'DM Sans', sans-serif;
+  direction: rtl;
+}
