@@ -1,51 +1,14 @@
-// CategoryButtons.jsx
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useProducts } from "../../hooks/useProducts.js";
 import "./CategoryButtons.css";
 
-// دالة لتحديد الألوان حسب الفئة
-function getCategoryStyle(category, index) {
-  const colorSchemes = [
-    {
-      background: "linear-gradient(135deg, #FEE7AA 0%, #FFDD80 100%)",
-      color: "#3785D4"
-    },
-    {
-      background: "linear-gradient(135deg, #6DA7E2 0%, #2C7ED1 100%)",
-      color: "#FFFFFF"
-    }
-  ];
-  
-  // استخدام index للتناوب بين الألوان
-  return colorSchemes[index % 2];
-}
-
-function CategoryButton({ label, targetId, active, onClick, index }) {
-  const style = getCategoryStyle(label, index);
-  
-  return (
-    <button
-      className={`category-btn ${active ? "active" : ""}`}
-      style={style}
-      onClick={() => {
-        document.getElementById(targetId)?.scrollIntoView({
-          behavior: "smooth",
-        });
-        onClick(targetId);
-      }}
-    >
-      {label}
-    </button>
-  );
-}
-
 function CategoryButtons({ categories: categoriesProp, activeCategory: activeProp, onCategoryChange }) {
   const products = useProducts();
-
-  // إذا تم تمرير الفئات من الأعلى نستخدمها، وإلا نبنيها من البيانات
   const categories = categoriesProp ?? [...new Set(products.map(p => p.category))];
 
   const [activeCategory, setActiveCategory] = useState(activeProp ?? categories[0] ?? null);
+  const [open, setOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
   useEffect(() => {
     if (activeProp) {
@@ -53,25 +16,50 @@ function CategoryButtons({ categories: categoriesProp, activeCategory: activePro
     }
   }, [activeProp]);
 
-  const handleClick = (targetId) => {
-    setActiveCategory(targetId);
-    onCategoryChange?.(targetId);
+  // close when click outside
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const handleSelect = (category) => {
+    setActiveCategory(category);
+    onCategoryChange?.(category);
+    document.getElementById(category)?.scrollIntoView({ behavior: "smooth" });
+    setOpen(false);
   };
 
   return (
-    <div className="category-buttons-container">
-      {categories.map((category, index) => (
-        <CategoryButton
-          key={category}
-          label={category}
-          targetId={category}
-          active={activeCategory === category}
-          onClick={handleClick}
-          index={index}
-        />
-      ))}
+    <div className="category-select-container" ref={dropdownRef}>
+      <div 
+        className={`custom-select ${open ? "open" : ""}`}
+        onClick={() => setOpen(!open)}
+      >
+        <span>{activeCategory || "الأقسام"}</span>
+        <span className="arrow" />
+      </div>
+
+      {open && (
+        <ul className="custom-options">
+          {categories.map((category) => (
+            <li
+              key={category}
+              className={category === activeCategory ? "active" : ""}
+              onClick={() => handleSelect(category)}
+            >
+              {category}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
 
 export default CategoryButtons;
+
