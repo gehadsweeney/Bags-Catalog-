@@ -35,10 +35,10 @@
 }
 .category-btn {
   width: 200px;
-  height: 45px;
-  border-radius: 15px;
+  height: 40px;
+  border-radius: 10px;
   margin: 15px 0px;
-  font-size: 20px;
+  font-size: 15px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 }
@@ -50,11 +50,11 @@
   margin: 15px 0;
 }
 .category-btn {
-  width: 120px;
-  height: 25px;
-  border-radius: 10px;
+  width: 130px;
+  height: 30px;
+  border-radius: 5px;
   margin: 10px 0px;
-  font-size: 12px;
+  font-size: 8px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 }

@@ -4,26 +4,24 @@ import { useProducts } from "../../hooks/useProducts.js";
 import "./CategoryButtons.css";
 
 // دالة لتحديد الألوان حسب الفئة
-function getCategoryStyle(category) {
-  const styles = {
-    "حقائب الطعام ": {
+function getCategoryStyle(category, index) {
+  const colorSchemes = [
+    {
       background: "linear-gradient(135deg, #FEE7AA 0%, #FFDD80 100%)",
       color: "#3785D4"
     },
-    "حقائب الأمومة": {
+    {
       background: "linear-gradient(135deg, #6DA7E2 0%, #2C7ED1 100%)",
       color: "#FFFFFF"
     }
-  };
+  ];
   
-  return styles[category] || {
-    background: "linear-gradient(135deg, #333 0%, #666 100%)",
-    color: "#fff"
-  };
+  // استخدام index للتناوب بين الألوان
+  return colorSchemes[index % 2];
 }
 
-function CategoryButton({ label, targetId, active, onClick }) {
-  const style = getCategoryStyle(label);
+function CategoryButton({ label, targetId, active, onClick, index }) {
+  const style = getCategoryStyle(label, index);
   
   return (
     <button
@@ -62,13 +60,14 @@ function CategoryButtons({ categories: categoriesProp, activeCategory: activePro
 
   return (
     <div className="category-buttons-container">
-      {categories.map(category => (
+      {categories.map((category, index) => (
         <CategoryButton
           key={category}
           label={category}
           targetId={category}
           active={activeCategory === category}
           onClick={handleClick}
+          index={index}
         />
       ))}
     </div>
