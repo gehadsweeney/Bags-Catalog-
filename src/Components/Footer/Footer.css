@@ -58,16 +58,16 @@
 @media (max-width:767px){
     .content-footer > img,
     .content-footer > a > img{
-    width: 60px;
-    height: 12px;
+    width: 70px;
+    height: 15px;
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
     border-radius: 50px;
 }
 .content-footer{
     position: absolute;
-    left: 60px;
-    transform: translateY(-230%);
+    left: 70px;
+    transform: translateY(-240%);
     gap: 5px;
     display: flex;
     justify-content: center;
