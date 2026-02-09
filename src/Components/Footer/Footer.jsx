@@ -1,28 +1,34 @@
-import React from 'react'
-import './Footer.css'
+import React from "react";
+import "./Footer.css";
 
 const Footer = () => {
   return (
     <div className="footer">
-      <img src="./footer.png" alt="Header banner featuring bags catalog branding and navigation elements" width="100%"/>
-{/* 
-        <div >
-        <div className="left-top-footer">
-        <button className="order-now-btn"> 
-           اطلب حقيبتك الآن
-        </button>
-        <img src="./wats.png" alt="" />
-        </div>
-        <div className="left-bottom-footer">
-        <img src="./textfooter.png" alt="" />
-        </div>
-        </div>
-        <div>
-            <img src="./logo.png" alt="Logo" />
-        </div> */}
+      <img
+        src="./foter.png"
+        alt="Header banner featuring bags catalog branding and navigation elements"
+        width="100%"
+      />
 
+      <div>
+        <div className="content-footer">
+          <img src="./wats.png" alt="" />
+                    <a
+            className="whatsapp-button"
+            href="https://wa.me/+966503863911"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <img
+              className="button"
+              src="/buttonF.png"
+              alt="WhatsApp contact button"
+            />
+          </a>
+        </div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

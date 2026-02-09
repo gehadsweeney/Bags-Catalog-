@@ -41,7 +41,7 @@
     transform: translateY(-50%);
     display: flex;
     flex-direction: column;
-    gap: 6 px;
+    gap: 6px;
     align-items: center;
 }
 
@@ -61,7 +61,7 @@
     transform: translateY(-50%);
     display: flex;
     flex-direction: column;
-    gap: 6 px;
+    gap: 4px;
     align-items: center;
 }
 
@@ -79,6 +79,7 @@
 .content{
     position: absolute;
     left: 40px;
+    gap: 0px;
     transform: translateY(-50%);
     display: flex;
     flex-direction: column;
